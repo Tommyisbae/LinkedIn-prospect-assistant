@@ -1,73 +1,160 @@
-# React + TypeScript + Vite
+Here’s a clean, professional **README.md** version of your project description — ready to drop into your repository 👇
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+````markdown
+# LinkedIn Prospect Assistant
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A **semi-automated Chrome Extension** for intelligent prospecting on LinkedIn, powered by **Google's Gemini AI**.  
+This tool is designed to be an intelligent companion for freelancers, sales professionals, and networkers — helping them **identify, analyze, and engage with high-quality prospects** in a safe and compliant manner.
 
-## React Compiler
+> Built using the **React + TypeScript + Vite** template.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🧭 Core Philosophy & Compliance
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+This tool operates on a strict **"human-in-the-loop"** principle.  
+It is designed to be an assistive tool — **not a fully automated one**.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### ✅ We Do
+- Leverage AI for intelligent analysis, data extraction, and message drafting.  
+- Require every action (e.g., sending a message or connection request) to be **manually executed by the user**.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### ❌ We Don't
+- Automate messaging, connection requests, or any other action that would violate **LinkedIn's Terms of Service**.  
+- Store or transmit user data externally — **all data is stored locally** for privacy and security.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+The primary goal is to **augment** your workflow, not replace it — ensuring safety and the integrity of your LinkedIn account.
+
+---
+
+## 🚀 Key Features
+
+- **Profile Collection** – Capture prospect profiles from LinkedIn search results or comment sections.  
+- **Duplicate Prevention** – Automatically ignores prospects already present in your "Captured" list.  
+- **On-Demand AI Analysis** – One-click deep profile analysis using a background service worker.  
+- **Human-in-the-Loop Verification** – Review all scraped data before running AI analysis.  
+- **Template-Based Scoring** – AI scores prospects based on user-defined goals and your own professional profile.  
+- **AI-Generated Outreach** – Generates a comprehensive report with:
+  - Prospect score  
+  - Justification  
+  - Personalized, context-aware connection message  
+- **Local & Secure** – Uses IndexedDB and `chrome.storage` to store data and API keys securely on your machine.
+
+---
+
+## 🧩 Tech Stack
+
+| Layer | Technology |
+|-------|-------------|
+| **Frontend** | React, TypeScript, Tailwind CSS |
+| **Build Tool** | Vite |
+| **Browser API** | Chrome Extension Manifest V3 |
+| **Local Database** | Dexie.js (IndexedDB wrapper) |
+| **AI Integration** | Google Generative AI SDK (`@google/generative-ai`) |
+
+---
+
+## ⚙️ Setup and Installation
+
+Follow these steps to get the extension running in your local environment.
+
+### Prerequisites
+- **Node.js** (v18 or higher recommended)  
+- **npm** or **yarn**
+
+---
+
+### 1️⃣ Clone the Repository
+```bash
+git clone [URL_OF_YOUR_GIT_REPO]
+cd linkedin-prospect-assistant
+````
+
+### 2️⃣ Install Dependencies
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 3️⃣ Build the Extension
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+This compiles the TypeScript and React code into static files used by the extension.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build
+```
+
+This will create a **`dist/`** folder containing the loadable extension files.
+
+---
+
+### 4️⃣ Load the Extension in Chrome
+
+1. Open **Google Chrome** and go to `chrome://extensions`
+2. Enable **Developer mode** (toggle in the top-right corner)
+3. Click **“Load unpacked”**
+4. Select the `dist/` folder
+5. The “LinkedIn Prospect Assistant” should now appear in your extensions list — **pin it** to your toolbar for easy access.
+
+---
+
+## 🧠 How to Use
+
+### ⚙️ Configure Settings
+
+1. Click the **gear icon (⚙️)** in the extension.
+2. Fill in your profile details: Title, Industry, Skills.
+3. Select your default **Analysis Goal**.
+4. Enter your **Gemini API Key**.
+5. Click **“Save Settings”**.
+
+---
+
+### 🧩 Capture Prospects
+
+* Navigate to a **LinkedIn search results page** → click **“Capture (Search)”**
+* Navigate to a **LinkedIn post with comments** → click **“Capture (Comments)”**
+* New, unique prospects will appear in your **Captured** list.
+
+---
+
+### 🤖 Analyze a Prospect
+
+1. Click any prospect in your list.
+2. The extension scrapes and displays raw data for review.
+3. Verify the data, then click **“Proceed with AI Analysis”**.
+
+---
+
+### 📊 View the Report
+
+After a few seconds, you’ll see:
+
+* A **score**
+* A **justification**
+* A **personalized, context-aware connection message**
+
+The analyzed prospect is moved from **Captured** to your **History**, which can be accessed from the main screen.
+
+---
+
+## 🛡️ License & Compliance
+
+This tool is built for ethical, human-supervised use.
+It does **not** automate or mimic human behavior on LinkedIn.
+All AI actions are user-initiated and comply with **LinkedIn’s Terms of Service**.
+
+---
+
+### 🌟 Credits
+
+Developed with ❤️ using **React, Vite, and Gemini AI**.
+
+```
+
+---
+
+Would you like me to add badges (e.g., “Built with React”, “License: MIT”, or “Powered by Gemini AI”) to make the top of the README look more polished?
 ```
