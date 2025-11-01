@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Set a fixed size for the extension popup */
+body {
+  width: 400px;
+  height: 500px;
+}
